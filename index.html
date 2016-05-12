@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Create a New Pen</title>
+    
+    
+    
+    
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+    <!doctype html>
+<html ng-app>
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+
+</head>
+
+<body ng-controller="gitCtrl">
+
+<div id="w">
+   <div>
+     <h1>Github AMAS</h1>
+
+      <input type="text" id="gitusername" ng-model="username" placeholder="Github username...">
+      <a href="#" id="gitsubmitbtn" ng-click="getGitInfo()" >Search</a>
+
+      <div id="gitapidata" class="clearfix"></div>
+   </div>
+   <div ng-show="userNotFound">
+      <h2>No User Info Found</h2>
+   </div>
+   <div ng-show="loaded">
+
+    <div ng-repeat="row in user">
+      <div>{{$index +1}} :  <a href="{{row.html_url}}">{{row.html_url}}</a></div>
+    </div>
+
+     
+
+</body>
+</html>
+    
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>
