@@ -1,0 +1,34 @@
+{
+  "name": "yozip",
+  "version": "1.0.1",
+  "description": "Unzip files from command line",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+"repository": {
+    "type": "git",
+    "url": "git://github.com/akashnimare/yozip.git"
+  },
+  "keywords": [
+"CLI",
+"Unzip",
+"Zip",
+"Rar"
+  ],
+  "author": {
+    "name": "akashnimare"
+  },
+  "bugs": {
+    "url": "https://github.com/akashnimare/yozip/issues"
+  },
+  "homepage": "https://github.com/akashnimare/yozip",
+  "preferGlobal": true,
+  "devDependencies": {
+ 	"yauzl":"2.4.2",
+  "mkdirp":"0.5.1",
+  "log-symbols": "^1.0.2",
+  },
+  "bin": {
+    "yozip": "index.js"
+  }
+}
