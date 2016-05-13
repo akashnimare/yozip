@@ -15,11 +15,17 @@ var argv = require('yargs')
 
 if (process.argv.length <= 2){
  console.log("Usage: yozip -u [zipped file path] -z [unzip folder path] -n [name of zipped file]");
- console.log("Example : \n yozip -u xyz.zip \n yozip /home/xy ab.zip");
+ console.log("Example : \n yozip -u xyz.zip \n yozip -z /home/xy -n xy.zip");
 }
 
 // //zip a folder
-if (argv.z)
+
+if (argv.n ==null && argv.z){
+console.log("Oh no! you forgot to use -n argument")
+};
+
+
+if (argv.z & argv.n)
 {
   var zip5 = new EasyZip();
   zip5.zipFolder(argv.z,function(){

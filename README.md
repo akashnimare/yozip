@@ -1,5 +1,5 @@
 ## yozip
-Extract & Zip files from command line.
+Extract and Zip files from command line.
 
 ## Installation
  > npm install --global yozip
@@ -7,4 +7,4 @@ Extract & Zip files from command line.
 ## Usage
 
   > yozip -u xyz.zip <br>
-  > yozip -z /home/xy -n ab.zip
+  > yozip -z /home/xy -n xy.zip

@@ -1,7 +1,7 @@
 {
   "name": "yozip",
-  "version": "1.0.3",
-  "description": "Extract & Zip from command line",
+  "version": "1.0.4",
+  "description": "Extract and Zip files from command line",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
