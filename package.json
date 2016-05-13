@@ -1,7 +1,7 @@
 {
   "name": "yozip",
-  "version": "1.0.2",
-  "description": "Unzip files from command line",
+  "version": "1.0.3",
+  "description": "Extract & Zip from command line",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,10 +10,13 @@
     "url": "git://github.com/akashnimare/yozip.git"
   },
   "keywords": [
-"CLI",
+"cli",
 "Unzip",
+"cli-tool",
 "Zip",
-"Rar"
+"Rar",
+"command-line",
+"Unzip"
   ],
   "author": {
     "name": "akashnimare"
@@ -26,6 +29,8 @@
   "dependencies": {
  	"yauzl":"2.4.2",
   "mkdirp":"0.5.1",
+  "easy-zip":"0.0.4",
+  "yargs":"4.7.0",
   "log-symbols": "^1.0.2"
   },
   "bin": {

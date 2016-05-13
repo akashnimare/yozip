@@ -1,39 +1,56 @@
 #! /usr/bin/env node
 
 var yauzl = require("yauzl");
+var EasyZip = require('easy-zip').EasyZip;
 var path = require("path");
 var fs = require("fs");
 var logSymbols = require('log-symbols');
 var Transform = require("stream").Transform;
+var zip = new EasyZip();
+var argv = require('yargs')
+    // .usage('Usage: $0 -u [zipped file path] -z [unzip folder path] -n [name of zipped file]')
+    // .example('$0 -u xyz.zip')
+    // .example('$0 -z /home/xy ab.zip')
+    .argv; 
 
-var zipFilePath = process.argv[2];
-if (zipFilePath == null || /^-/.test(zipFilePath)) {
-  console.log(
-    "usage: yozip path/to/file.zip\n" +
-    "\n" +
-    "unzips the specified zip file into the current directory");
-  process.exit(1);
+if (process.argv.length <= 2){
+ console.log("Usage: yozip -u [zipped file path] -z [unzip folder path] -n [name of zipped file]");
+ console.log("Example : \n yozip -u xyz.zip \n yozip /home/xy ab.zip");
 }
 
-function mkdirp(dir, cb) {
-  if (dir === ".") return cb();
-  fs.stat(dir, function(err) {
-    if (err == null) return cb(); // already exists
-
-    var parent = path.dirname(dir);
-    mkdirp(parent, function() {
-      process.stdout.write(dir.replace(/\/$/, "") + "/\n");
-      fs.mkdir(dir, cb);
+// //zip a folder
+if (argv.z)
+{
+  var zip5 = new EasyZip();
+  zip5.zipFolder(argv.z,function(){
+    zip5.writeToFile(argv.n);
+    console.log(logSymbols.success, 'Zipped successfully!');
     });
+}
+
+if (argv.u) 
+{
+  var zipFilePath = argv.u;
+  function mkdirp(dir, cb) {
+    if (dir === ".") return cb();
+    fs.stat(dir, function(err) {
+      if (err == null) return cb(); // already exists
+      var parent = path.dirname(dir);
+      mkdirp(parent, function() {
+        process.stdout.write(dir.replace(/\/$/, "") + "/\n");
+        fs.mkdir(dir, cb);
+      });
   });
 }
 
 yauzl.open(zipFilePath, {lazyEntries: true}, function(err, zipfile) {
-  if (err) throw err;
-
+  if (err) {
+    console.error(logSymbols.error, err);
+    return;
+  }
   zipfile.readEntry();
   zipfile.on("close", function() {
-    console.log(logSymbols.success, 'finished successfully!');
+    console.log(logSymbols.success, 'Unzipped successfully!');
   });
   zipfile.on("entry", function(entry) {
     if (/\/$/.test(entry.fileName)) {
@@ -80,7 +97,6 @@ yauzl.open(zipFilePath, {lazyEntries: true}, function(err, zipfile) {
             cb();
             zipfile.readEntry();
           };
-
           // pump file contents
           readStream.pipe(filter).pipe(fs.createWriteStream(entry.fileName));
         });
@@ -88,3 +104,4 @@ yauzl.open(zipFilePath, {lazyEntries: true}, function(err, zipfile) {
     }
   });
 });
+}
